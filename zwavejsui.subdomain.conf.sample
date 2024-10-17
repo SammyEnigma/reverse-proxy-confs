@@ -1,13 +1,12 @@
-## Version 2024/10/15
-# make sure that your immich container is named immich
-# make sure that your dns has a cname set for immich
-# immich v1.118+ only. For earlier versions, change $upstream_port to 3001 
+## Version 2024/10/17
+# make sure that your zwave-js-ui container is named zwave-js-ui
+# make sure that your dns has a cname set for zwave-js-ui
 
 server {
     listen 443 ssl;
     listen [::]:443 ssl;
 
-    server_name immich.*;
+    server_name zwave-js-ui.*;
 
     include /config/nginx/ssl.conf;
 
@@ -38,18 +37,8 @@ server {
 
         include /config/nginx/proxy.conf;
         include /config/nginx/resolver.conf;
-        set $upstream_app immich;
-        set $upstream_port 2283;
-        set $upstream_proto http;
-        proxy_pass $upstream_proto://$upstream_app:$upstream_port;
-
-    }
-
-    location ~ (/immich)?/api {
-        include /config/nginx/proxy.conf;
-        include /config/nginx/resolver.conf;
-        set $upstream_app immich;
-        set $upstream_port 2283;
+        set $upstream_app zwave-js-ui;
+        set $upstream_port 8091;
         set $upstream_proto http;
         proxy_pass $upstream_proto://$upstream_app:$upstream_port;
 
